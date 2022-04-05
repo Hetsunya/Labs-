@@ -25,7 +25,7 @@ int main()
 
     f = 0;
     x = x + 0.1;
-  } while (x <= 1.7);
+  } while (x < 1.7);
 
   return 0;
 }
