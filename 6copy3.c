@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-int n, max = -1099, min1, x, min2, g, i2, i;
+int n, max = -1099, min1, sum, min2, g, i2, i;
 void fill ( int n , int a[])
 {
 for ( i = 0; i < n ; i ++)
@@ -13,37 +13,32 @@ void find(int n)
 {
 int A[n];
 fill (n , A );
-for ( i = 0; i < n ; i ++)
-  {
-  printf ("%4d", A[i]);
-  }
+for ( i = 0; i < n ; i ++) printf ("%4d", A[i]);
 
-printf("\n"); printf("\n");
-min1 = A[1];
-min2 = A[0];
-for(i2 = 0;i2 < n - 1; i2 ++)
-  {
-    x = A[i2] + A[i2 + 1];
-    if(i2 == n) x = A[i2] + A[i2 - 1];
+  printf("\n");
+  min1 = A[1];
+  min2 = A[0];
 
-    if(x > max) max = x;
+for(i2 = 0;i2 < n - 1; i2 ++){
+   sum= A[i2] + A[i2 + 1];
+    if(i2 == n)sum= A[i2] + A[i2 - 1];
 
-    if(A[i2] < min1){
-      min2 = min1;
-      min1 = A[i2];
+    if(sum > max) max = sum;
+
+    if( (A[i2] == -50) && (min1 == -50))
+      {  min2 = A[i2];
+         printf("ееееее1");
+         break;
+      }
+   sum= A[i2] + A[i2 + 1];
+    if(i2 == n)sum= A[i2] + A[i2 - 1];
+
+
+    if(A[i2] < min1)
+     {
+       min2 = min1;
+       min1 = A[i2];
      }
-  if(A[i2] < min2 && A[i2] != min1) min2 = A[2];
-  if(A[n] < min1)
-    {
-      min2 = min1;
-      min1 = A[i2];
-    }
-  if(A[n-1] < min2) min2 = A[n-1];
-  if(A[i2] < 0 && (min2 > 0 || A[n] < min1) && A[i2] != min1)  min2 = A[i2];
-  }
-  if(min1 == -50 && A[i2] == -50)
-  {
-    min2 = A[i2];
   }
 }
 

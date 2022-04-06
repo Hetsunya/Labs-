@@ -44,13 +44,13 @@ if(x > max){
 if(A[i2] < min1){
     min2 = min1;
     min1 = A[i2];
-    printf ("a ---->%d\n", A[i2]);
-    printf("min1 ---> %d\n", min1);
-    printf("min2 ---> %d\n\n", min2);
+    // printf ("a ---->%d\n", A[i2]);
+    // printf("min1 ---> %d\n", min1);
+    // printf("min2 ---> %d\n\n", min2);
   }
 if(A[i2] < min2 && A[i2] != min1){
      min2 = A[2];
-     printf("min2 ---> %d\n\n", min2);
+     // printf("min2 ---> %d\n\n", min2);
    }
 
 // printf ("a ---->%d\n", A[i2]);
