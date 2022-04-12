@@ -50,7 +50,11 @@ int main()
   printf("n --->");
   scanf("%d", &y);
   integral(&y);
+<<<<<<< HEAD
   printf("%d\n", i);
+=======
+  //printf("%d\n", i);
+>>>>>>> 62831cf65be56ca14830fce0af1ad3fe91f33919
   //printf("sum = %f\n", sum);
 
     return 0;

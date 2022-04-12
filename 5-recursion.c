@@ -2,6 +2,7 @@
 #include <math.h>
 #include <stdlib.h>
 
+<<<<<<< HEAD
 void rec(int n)
 {
   int x;
@@ -11,14 +12,30 @@ void rec(int n)
   if(n) rec(n/10);
   else return;
 
+=======
+unsigned int fl (int n)
+{
+  s[i]=c[strlen(c)];
+  fl(i-1);
+  i=atoi(s);
+  printf("%d",i);
+>>>>>>> 62831cf65be56ca14830fce0af1ad3fe91f33919
 }
 
 int main()
 {
+<<<<<<< HEAD
   int n;
   printf("Number--->");
   scanf ("%d", &n);
   rec(n);
+=======
+  char c[n],s[n];
+  printf("Number--->");
+  scanf ("%d", &n);
+  char *gets(c);
+  fl(n);
+>>>>>>> 62831cf65be56ca14830fce0af1ad3fe91f33919
 
   return 0;
 }//Записать заданное неотрицательное целое число наоборот.ddd

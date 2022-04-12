@@ -3,19 +3,19 @@
 
 int main()
 {
-  float f;
+  float f,x;
 
   printf("x        f(x)\n");
   printf("--------------\n");
 
-  for (float x = 0.0; x < 1.7f; x + 0.1f)
+  for (x = 0.0; x < 1.7f; x + 0.1f)
   {
-    if (x >= 0 && x < 0.7)
+    if (x >= 0 && x < 0.7f)
     {
       f = 1 / (1 + 25 * pow(x, 2));
     }
 
-    if (x >= 0.6 && x < 1.7)
+    if (x >= 0.6f && x < 1.7f)
     {
       f = (x + 2 * pow(x, 2))*pow(sin(x), 2);
     }

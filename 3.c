@@ -55,11 +55,19 @@ void dw()
 
 int main()
 {
+<<<<<<< HEAD
   printf("for: \n");
   fr();
   // printf("\n");printf("\n");
   x = 0;
   printf("do while: \n");
+=======
+  printf("for \n");
+  fr();
+  // printf("\n");printf("\n");
+  x = 0;
+  printf("do while \n");
+>>>>>>> 62831cf65be56ca14830fce0af1ad3fe91f33919
   // printf("\n");printf("\n");
   dw();
 

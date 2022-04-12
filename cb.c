@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #include <stdio.h>
 #include <conio.h>
 #include <stdlib.h>
@@ -75,4 +76,21 @@ static void do_test (const int date[3], int expected)
     "for date = {%d, %d, %d}, expected %d days, but got %d",
     date[0], date[1], date[2], expected, actual
   );
+=======
+#include <inttypes.h>
+#include <criterion/criterion.h>
+
+uint64_t descendingOrder(uint64_t n)
+{
+  printf("%d\n", n);
+  return n;
+}
+
+uint64_t Test(descendingOrder, should_work_on_several_examples) {
+    cr_assert_eq(descendingOrder(0), 0);
+    cr_assert_eq(descendingOrder(1), 1);
+    cr_assert_eq(descendingOrder(15), 51);
+    cr_assert_eq(descendingOrder(1021), 2110);
+    cr_assert_eq(descendingOrder(123456789), 987654321);
+>>>>>>> 62831cf65be56ca14830fce0af1ad3fe91f33919
 }
