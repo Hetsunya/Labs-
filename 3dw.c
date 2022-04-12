@@ -3,8 +3,7 @@
 
 int main()
 {
-  float x = 0;
-  float f;
+  float x, f;
 
   printf("x        f(x)\n");
   printf("--------------\n");
@@ -16,7 +15,7 @@ int main()
       f = 1 / (1 + 25 * pow(x, 2));
     }
 
-    if (x >= 0.6 && x <= 1.6)
+    if (x >= 0.6 && x < 1.7)
     {
       f = (x + 2 * pow(x, 2))*pow(sin(x), 2);
     }
@@ -25,7 +24,7 @@ int main()
 
     f = 0;
     x = x + 0.1;
-  } while (x <= 1.7);
+} while (x < 1.7f);
 
   return 0;
 }
