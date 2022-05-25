@@ -1,6 +1,5 @@
 // Вывести на экран слова исходной строки, встречающиеся в ней только один
-// раз. Например: при вводе "When hunter meets hunter this hunter eats
-// hunter" результат работы программы будет "When meets this eats".
+// раз. Например: при вводе "When hunter meets hunter this hunter eats hunter" результат работы программы будет "When meets this eats".
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
