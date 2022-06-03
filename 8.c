@@ -29,4 +29,3 @@ int main() {
 exit:
   return 0;
 }
-6

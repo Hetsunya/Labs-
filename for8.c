@@ -2,6 +2,7 @@
 #include <ctype.h>
 #include <termios.h>
 #include <unistd.h>
+
 int mygetch() {
   struct termios oldt, newt;
   int c;
@@ -13,6 +14,7 @@ int mygetch() {
   tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
   return c;
 }
+
 int main() {
   char a = mygetch();
   return 0;

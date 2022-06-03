@@ -30,7 +30,7 @@ int main() {
     for (int j = 0; j < r; j++)
       if (a[i][0] > a[j][0]) {
         //if ((a[i][0] || a[j][0]) > 100)
-        printf("%d --- %d\n", i, j);
+      //  printf("%d --- %d\n", i, j);
         for (int k = 0; k < n; k++) {
           int t = a[i][k];
           a[i][k] = a[j][k];
