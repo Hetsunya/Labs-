@@ -7,20 +7,11 @@
 #include <time.h>
 
 //Заполнение
-void fill() {
+int fill(int r, int c, int a[r][c]) {
   srand(time(NULL));
-  int r, c;
-  printf("rows -> ");
-  scanf("%d", &r);
-  printf("columns -> ");
-  scanf("%d", &c);
-  int a[r][c];
-
   for (int i = 0; i < r; i++)
     for (int j = 0; j < c; j++)
       a[i][j] = rand() % 10 - 0;
-
-  return a;
 }
 //Вывод
 void output(int r, int c, int a[r][c]) {
@@ -49,9 +40,15 @@ void sort(int r, int c, int a[r][c]) {
 
 int main() {
   srand(time(NULL));
+
   int r, c;
+  printf("rows -> ");
+  scanf("%d", &r);
+  printf("columns -> ");
+  scanf("%d", &c);
   int a[r][c];
-  fill();
+
+  fill(r, c, a);
   printf("Matrix before sorting:\n");
   output(r, c, a);
   sort(r, c, a);
