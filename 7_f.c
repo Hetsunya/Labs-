@@ -54,4 +54,5 @@ int main() {
   sort(r, c, a);
   printf("Matrix after sorting:\n");
   output(r, c, a);
+  return 0;
 }
