@@ -1,4 +1,4 @@
-// абораторная работа №10
+// Лабораторная работа №10
 // Динамическое выделение памяти
 // Задания для самостоятельного выполнения
 // Переписать код своего варианта лабораторной работы №7 под использование
@@ -7,18 +7,19 @@
 // , для чётных - II способ.
 
 // II способ требует использования двухуровневых указателей:
-// 1 int ** a = ( int **) malloc ( n * sizeof ( int *) ) ;
-// 2 if (! a )
-// 3 {
-// 4 printf (" Memory allocation error !\ n ") ;
-// 5 exit ( EXIT_FAILURE ) ;
-// 6 }
-// 7 int i , j ;
-// 8 for ( i = 0; i < n ; i ++)
-// 9 p [ i ] = malloc ( m * sizeof ( int ) ) ;
-// 10 for ( i = 0; i < n ; i ++)
-// 11 for ( j = 0; j < m ; j ++)
-// 12 a [ i ][ j ] = i * m + j + 1;
-// 13 for ( i = 0; i < n ; i ++)
-// 14 free ( a [ i ]) ;
-// 15 free ( a ) ;
+// int **a = (int **)malloc(n * sizeof(int *));
+// if (!a) {
+//   printf(" Memory allocation error !\ n ");
+//   exit(EXIT_FAILURE);
+// }
+
+// int i, j;
+// for (i = 0; i < n; i++)
+//   p[i] = malloc(m * sizeof(int));
+// for (i = 0; i < n; i++)
+//   for (j = 0; j < m; j++)
+//     a[i][j] = i * m + j + 1;
+
+//  for ( i = 0; i < n ; i ++)
+//  free ( a [ i ]) ;
+//  free ( a ) ;
