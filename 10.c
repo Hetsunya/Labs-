@@ -10,7 +10,8 @@ int fill(int n, int m, int **a) {
   srand(time(NULL));
   for (int i = 0; i < n; i++)
     for (int j = 0; j < m; j++) {
-      a[i][j] = i * m + j + 1;
+      // a[i][j] = i * m + j + 1;
+      a[i][j] = rand() % 20 - 0;
       printf("%d ", a[i][j]);
     }
 }
@@ -26,26 +27,27 @@ void output(int n, int m, int **a) {
 //Сортировка
 void sort(int n, int m, int **a, int r) {
 
-  // for (int i = 0; i < r; i++)
-  //   for (int j = 0; j < r; j++)
-  //     if (a[i][0] > a[j][0]) {
-  //       // if ((a[i][0] || a[j][0]) > 100)
-  //       //  printf("%d --- %d\n", i, j);
-  //       for (int k = 0; k < n; k++) {
-  //         int t = a[i][k];
-  //         a[i][k] = a[j][k];
-  //         a[j][k] = t;
-  //       }
-  //     }
-  for (int i = 0; i < n; i++)
-    for (int j = 0; j < m; j++)
-      if (a[i][0] > a[j][0])
-        for (int k = 0; k < m; k++) {
+  for (int i = 0; i < r; i++)
+    for (int j = 0; j < r; j++)
+      if (a[i][0] > a[j][0]) {
+        // if ((a[i][0] || a[j][0]) > 100)
+        //  printf("%d --- %d\n", i, j);
+        for (int k = 0; k < n; k++) {
           int t = a[i][k];
           a[i][k] = a[j][k];
           a[j][k] = t;
         }
-}// Если n>m или m<n на >= 2 то пиздец
+      }
+      
+  // for (int i = 0; i < n; i++)
+  //   for (int j = 0; j < m; j++)
+  //     if (a[i][0] > a[j][0])
+  //       for (int k = 0; k < m; k++) {
+  //         int t = a[i][k];
+  //         a[i][k] = a[j][k];
+  //         a[j][k] = t;
+  //       }
+} // Если n>m или m<n на >= 2 то ломается
 
 int main() {
   int n, m;
