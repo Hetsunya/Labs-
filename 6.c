@@ -31,20 +31,25 @@ void find(int n) {
 
   //Поиск min
   for (int i = 0; i < n; i++) {
-    printf("%4d", A[i]);
+    // printf("%4d", A[i]);
     if (A[i] <= min1) {
       min2 = min1;
       min1 = A[i];
 
       t2 = t1;
       t1 = i;
-      printf("<--");
+    //  printf("<--");
     } else if (A[i] <= min2) {
-      min2 = A[i];
+     min2 = A[i];
 
       t2 = i;
-      printf("<--");
+      // printf("<--");
     }
+  }
+  for (int i = 0; i < n; i++) {
+    printf("%4d", A[i]);
+    if (i == t2 || i == t1)
+      printf("<--");
   }
   printf("\nmin1 ---> %d", min1);
   printf("\nmin2 ---> %d\n", min2);
@@ -52,8 +57,11 @@ void find(int n) {
   A[t1] = A[t1] + max;
   A[t2] = A[t2] + max;
 
-  for (int i = 0; i < n; i++)
+  for (int i = 0; i < n; i++) {
     printf("%4d", A[i]);
+    if (i == t2 || i == t1)
+      printf("<--");
+  }
 }
 
 int main() {
@@ -61,7 +69,6 @@ int main() {
   printf(" n ---> ");
   scanf("%d", &n);
   find(n);
-
 
   return 0;
 }
