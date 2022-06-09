@@ -22,31 +22,24 @@
 #include <string.h>
 #include <time.h>
 
+#define MAX_SIZE 15
+
+typedef struct buses bus;
+
 struct buses {
   int number;           // номер автобуса
   char destination[15]; // пункт назначения
   float dep_time;       // departure time - время отбытия
   float arr_time;       // arrival time - время прибытия
 } buses;
-struct buses bus[10];
+// struct buses bus[10];
 
-// int input(struct buses *, int, int);
 int input(struct buses *, int);
-void print(struct buses *, int);
+void print(struct buses *, int, int);
 int delet(struct buses *, int);
 void find(struct buses *, int);
-int save(char *filename, struct buses *p, int);
+int save(char *filename, struct buses *p, int n);
 int load(char *filename);
-
-static int is_empty (const char *s)
-{
-  while ( *s != '\0' )
-  {
-    if ( ! isspace( (unsigned char) *s ) ) return -1;
-    s++;
-  }
-  return 0;
-}
 
 int main() {
   // FILE *f;
@@ -55,10 +48,11 @@ int main() {
   //   printf("File not existing");
   char c;
   char *filename = "12.dat";
-  int k = 0;
-  // struct buses bus[100];
-  // struct buses bus[] = {1, "Surgut", 15.00, 23.40};
+  int k = MAX_SIZE;
+  // struct buses bus[MAX_SIZE];
+  struct buses bus[MAX_SIZE] = {1, "Surgut", 15.00, 23.40};
   int n = sizeof(bus) / sizeof(bus[0]);
+a:
   while (1) {
     printf("\n1. Enter bus data.\n");
     printf("2. Display a list of buses.\n");
@@ -68,7 +62,6 @@ int main() {
     printf("6 to save the database to a file.\n");
     printf("7. Exit.\n");
     c = _getch();
-
     switch (c) {
     case '1':
       system("cls");
@@ -76,7 +69,7 @@ int main() {
       break;
     case '2':
       system("cls");
-      print(bus, k);
+      print(bus, k, n);
       break;
     case '3':
       // system("cls");
@@ -88,6 +81,7 @@ int main() {
       break;
     case '5':
       load(filename);
+      goto a;
     case '6':
       save(filename, bus, n);
     case '7':
@@ -102,7 +96,7 @@ int main() {
   return 0;
 }
 //Вывод информации о существующих
-void print(struct buses *bus, int count) {
+void print(struct buses *bus, int count, int n) {
   if (count) {
     for (int i = 0; i < count; i++) {
       if (bus[i].number <= 0)
@@ -113,8 +107,17 @@ void print(struct buses *bus, int count) {
           i + 1, bus[i].number, bus[i].destination, bus[i].dep_time,
           bus[i].arr_time);
     }
-  } else
-    printf("The array is empty!\n");
+  } else {
+    for (int i = 0; i < n; i++) {
+      if (bus[i].number <= 0)
+        continue;
+      printf(
+          "[%d]Bus number: %d, Destination: %s, Departure time: %0.2f, Arrival "
+          "time %0.2f\n",
+          i + 1, bus[i].number, bus[i].destination, bus[i].dep_time,
+          bus[i].arr_time);
+    }
+  }
 }
 //Добавление
 int input(struct buses *bus, int count) {
@@ -127,23 +130,29 @@ int input(struct buses *bus, int count) {
     printf("\nEnter the bus data separated by a space - number, destination, "
            "Departure time, Arrival time \n");
     for (int i = 0; i < count; i++)
+    {
+    a:
       scanf("%d %s %f %f", &bus[i].number, bus[i].destination, &bus[i].dep_time,
             &bus[i].arr_time);
+            if ( ((bus[i].arr_time || bus[i].dep_time ) < 0) || ((bus[i].arr_time || bus[i].dep_time) > 24.00) )
+            {
+              printf("Incorrect time");
+              goto a;
+            }
+          }
+
   } else {
     for (int i = count; i > -1; i--)
       bus[i + 1] = bus[i];
-    printf("\nEnter the bus data separated by a space - number, destination, "
-           "Departure time, Arrival time \n");
+    printf("\nEnter the bus data separated by a space - number, destination, Departure time, Arrival time \n");
     scanf("%d %s %f %f", &bus[0].number, bus[0].destination, &bus[0].dep_time,
           &bus[0].arr_time);
     count = count + 1;
 
-    // printf("\nEnter the bus data separated by a space - number, destination,
-    // "
-    //        "Departure time, Arrival time \n");
-    // scanf("%d %s %f %f", &bus[count + 1].number, bus[count + 1].destination,
-    //       &bus[count + 1].dep_time, &bus[count + 1].arr_time);
-    // count = count + 1;
+    printf("\nEnter the bus data separated by a space - number,destination, Departure time, Arrival time \n");
+    scanf("%d %s %f %f", &bus[count + 1].number, bus[count + 1].destination,
+          &bus[count + 1].dep_time, &bus[count + 1].arr_time);
+    count = count + 1;
   }
   return count;
 }
@@ -167,7 +176,6 @@ int delet(struct buses *bus, int count) {
   } else {
     system("cls");
     printf("The array is empty!\n");
-    system("cls");
   }
   return count;
 }
@@ -180,11 +188,11 @@ void find(struct buses *bus, int count) {
   for (int i = 0; i < count; i++) {
     // if (bus[i].destination == c)
     if (!strcmp(bus[i].destination, c)) {
-      printf(
-          "[%d]Bus number: %d, Destination: %s, Departure time: %0.2f, Arrival "
-          "time %0.2f\n",
-          i + 1, bus[i].number, bus[i].destination, bus[i].dep_time,
-          bus[i].arr_time);
+      printf("[%d]Bus number: %d, Destination: %s, Departure time: %0.2f, "
+             "Arrival "
+             "time %0.2f\n",
+             i + 1, bus[i].number, bus[i].destination, bus[i].dep_time,
+             bus[i].arr_time);
       temp = temp + 1;
     }
   }
@@ -194,6 +202,7 @@ void find(struct buses *bus, int count) {
 
 // запись структуры в файл
 int save(char *filename, struct buses *st, int n) {
+
   FILE *fp;
   char *c;
 
@@ -203,13 +212,13 @@ int save(char *filename, struct buses *st, int n) {
   if ((fp = fopen(filename, "wb")) == NULL)
     perror("Error occured while opening file");
 
-  // устанавливаем указатель на начало структуры
+  // записываем количество структур
   c = (char *)&n;
-  // // посимвольно записываем в файл структуру
-
   for (int i = 0; i < sizeof(int); i++) {
     putc(*c++, fp);
   }
+
+  // посимвольно записываем в файл все структуры
   c = (char *)st;
   for (int i = 0; i < size; i++) {
     putc(*c, fp);
@@ -217,116 +226,66 @@ int save(char *filename, struct buses *st, int n) {
   }
   fclose(fp);
 }
-// // загрузка из файла структуры
-// int load(char * filename)
-// {
-//     FILE * fp;
-//     char *c;
-//     int m = sizeof(int);
-//     int n, i;
-//
-//     // выделяем память для количества данных
-//     int *pti = (int *)malloc(m);
-//
-//     if ((fp = fopen(filename, "r")) == NULL)
-//     {
-//         perror("Error occured while opening file");
-//         return 1;
-//     }
-//     // считываем количество структур
-//     c = (char *)pti;
-//     while (m>0)
-//     {
-//         i = getc(fp);
-//         if (i == EOF) break;
-//         *c = i;
-//         c++;
-//         m--;
-//     }
-//     //получаем число элементов
-//     n = *pti;
-//
-//     // выделяем память для считанного массива структур
-//     struct buses * ptr = (struct buses *) malloc(n * sizeof(struct buses));
-//     c = (char *)ptr;
-//     // после записи считываем посимвольно из файла
-//     while ((i= getc(fp))!=EOF)
-//     {
-//         *c = i;
-//         c++;
-//     }
-//     // перебор загруженных элементов и вывод на консоль
-//     printf("\n%d people in the file stored\n\n", n);
-//
-//     for (int i = 0; i<n; i++)
-//     {
-//         printf("Bus number: %d, Destination: %s, Departure time: %0.2f,
-//         Arrival "
-//                "time %0.2f\n",
-//                bus[i].number, bus[i].destination, bus[i].dep_time,
-//                bus[i].arr_time);
-//     }
-//
-//     free(pti);
-//     free(ptr);
-//     fclose(fp);
-// }
+// загрузка из файла структуры
 int load(char *filename) {
   FILE *fp;
-  size_t lines_count = 0;
-  char line[10];
+  char *c;
+  int m = sizeof(int);
+  int n, i;
 
-  fp = fopen(filename, "r");
-  if (NULL == fp)
-    return 0;
+  // выделяем память для количества данных
+  int *pti = (int *)malloc(m);
 
-  while (fgets(line, 10, fp) != NULL) {
-    if (0 == is_empty(line)) {
-      fclose(fp);
-      return 0;
-    }
-    lines_count++;
+  if ((fp = fopen(filename, "r")) == NULL) {
+    perror("Error occured while opening file");
   }
-  fclose(fp);
 
-  // FILE *fp;
-  // char *c;
-  // int m = sizeof(int);
-  // int n, i;
-  //
-  // // выделяем память для количества данных
-  // int *pti = (int *)malloc(m);
-  //
-  // int size = sizeof(struct buses);
-  //
-  // if ((fp = fopen(filename, "r")) == NULL) {
-  //   perror("Error occured while opening file");
-  // }
-  //
-  // // считываем количество структур
-  // c = (char *)pti;
-  // while (m > 0) {
-  //   i = getc(fp);
-  //   if (i == EOF)
-  //     break;
-  //   *c = i;
-  //   c++;
-  //   m--;
-  // }
-  // //получаем число элементов
-  // n = *pti;
-  // // выделяем память для считанного массива структур
-  // struct buses *ptr = (struct buses *)malloc(n * sizeof(struct buses));
-  // c = (char *)ptr;
-  //
-  // while ((i = getc(fp)) != EOF) {
-  //   *c = i;
-  //   c++;
-  // }
-  // // перебор загруженных элементов и вывод на консоль
-  // printf("\n%d bus in the file stored\n\n", n);
-  // fclose(fp);
-  // free(pti);
-  // free(ptr);
-  // fclose(fp);
+  // считываем количество структур
+  c = (char *)pti;
+  while (m > 0) {
+    i = getc(fp);
+    if (i == EOF)
+      break;
+    *c = i;
+    c++;
+    m--;
+  }
+  //получаем число элементов
+  n = *pti;
+
+  // выделяем память для считанного массива структур
+  struct buses *ptr = (struct buses *)malloc(n * sizeof(struct buses));
+  c = (char *)ptr;
+  // после записи считываем посимвольно из файла
+  while ((i = getc(fp)) != EOF) {
+    *c = i;
+    c++;
+  }
+
+  // перебор загруженных элементов и вывод на консоль
+  printf("\n%d bus in the file stored\n\n", n);
+
+  free(pti);
+  free(ptr);
+  fclose(fp);
+  return n;
 }
+// }
+// int load(char *filename) {
+//   FILE *fp;
+//   size_t lines_count = 0;
+//   char line[10];
+//
+//   fp = fopen(filename, "r");
+//   if (NULL == fp)
+//     return 0;
+//
+//   while (fgets(line, 10, fp) != NULL) {
+//     if (0 == is_empty(line)) {
+//       fclose(fp);
+//       return 0;
+//     }
+//     lines_count++;
+//   }
+//   fclose(fp);
+// }

@@ -94,9 +94,15 @@ int input(struct buses *bus, int count) {
 
     printf("\nEnter the bus data separated by a space - number, destination, "
            "Departure time, Arrival time \n");
-    for (int i = 0; i < count; i++)
+    for (int i = 0; i < count; i++) {
+    a:
       scanf("%d %s %f %f", &bus[i].number, bus[i].destination, &bus[i].dep_time,
             &bus[i].arr_time);
+      if ( ((bus[i].arr_time || bus[i].dep_time ) < 0) || ((bus[i].arr_time || bus[i].dep_time) > 24.00) ) {
+        printf("Incorrect time\n");
+        goto a;
+      }
+    }
   } else {
     for (int i = count; i > -1; i--)
       bus[i + 1] = bus[i];
