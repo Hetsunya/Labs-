@@ -110,7 +110,7 @@ int input(struct buses *bus, int count) {
            "Departure time, Arrival time \n");
     scanf("%d %s %f %f", &bus[0].number, bus[0].destination, &bus[0].dep_time,
           &bus[0].arr_time);
-    count = count + 1;
+    count++;
 
     // printf("\nEnter the bus data separated by a space - number, destination,
     // "
